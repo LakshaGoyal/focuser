@@ -1,0 +1,9 @@
+{
+  "name": "focuser-server",
+  "version": "0.1.0",
+  "description": "Focuser Backend Server Placeholder",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "echo \"Server implementation planned for future phase.\""
+  }
+}

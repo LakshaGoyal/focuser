@@ -1,0 +1,21 @@
+{
+  "name": "focuser-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "agent",
+    "client"
+  ],
+  "scripts": {
+    "dev:client": "npm --prefix client run dev",
+    "dev:agent": "npm --prefix agent run dev",
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:agent\"",
+    "build:client": "npm --prefix client run build",
+    "build:agent": "npm --prefix agent run build",
+    "build": "npm run build:client && npm run build:agent",
+    "dist": "npm --prefix agent run dist"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

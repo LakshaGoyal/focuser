@@ -1,0 +1,68 @@
+{
+  "name": "focuser-agent",
+  "productName": "Focuser",
+  "version": "1.0.0",
+  "description": "Focuser Local Desktop Electron Agent",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc && node -e \"require('fs').copyFileSync('src/focus/win-helper.ps1', 'dist/focus/win-helper.ps1')\"",
+    "watch": "tsc -w",
+    "start": "npm run build && electron .",
+    "dev": "npm run build && electron .",
+    "dist": "npm run build && electron-builder --win nsis portable --x64"
+  },
+  "keywords": [
+    "focuser",
+    "electron",
+    "focus-mode",
+    "desktop-agent"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/ws": "^8.5.10",
+    "electron": "34.5.8",
+    "electron-builder": "^26.0.12",
+    "typescript": "^5.7.0"
+  },
+  "build": {
+    "appId": "com.focuser.app",
+    "productName": "Focuser",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "dist/focus/win-helper.ps1",
+        "to": "win-helper.ps1"
+      }
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "artifactName": "Focuser-${version}-${arch}.${ext}"
+    },
+    "nsis": {
+      "artifactName": "Focuser-Setup-${version}.exe",
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": false,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Focuser"
+    },
+    "portable": {
+      "artifactName": "Focuser-Portable-${version}.exe"
+    }
+  }
+}
